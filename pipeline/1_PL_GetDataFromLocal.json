@@ -1,0 +1,64 @@
+{
+	"name": "1_PL_GetDataFromLocal",
+	"properties": {
+		"activities": [
+			{
+				"name": "LookUP Local FIle",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "FileServerReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "LocalFileSystem_DS",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "Filter product subcategory is 3",
+				"type": "Filter",
+				"dependsOn": [
+					{
+						"activity": "LookUP Local FIle",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('LookUP Local FIle').output.value",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@equals(item().product_sub_cat_code, '3')",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-06-07T20:24:39Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

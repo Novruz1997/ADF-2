@@ -1,0 +1,17 @@
+{
+	"name": "LocalFileSystem_LK",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "FileServer",
+		"typeProperties": {
+			"host": "\\\\MSI\\Users\\Novruz's_MSI\\Desktop\\ADF\\ADF_UDEMY_COURSE_2\\SQL_FILE",
+			"userId": "Novruz's_MSI",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJiMmI1OTkwOS0xMGUwLTRiYmQtYTdjYy1mM2E2NjdjZWEzZmMiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "SelfHostedintegrationRuntime1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

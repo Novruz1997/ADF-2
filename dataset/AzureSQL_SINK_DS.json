@@ -1,0 +1,17 @@
+{
+	"name": "AzureSQL_SINK_DS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSQL_EMP_LK",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "newOutputJoin"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

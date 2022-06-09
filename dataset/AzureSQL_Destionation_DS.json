@@ -1,0 +1,17 @@
+{
+	"name": "AzureSQL_Destionation_DS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSQL_LK_3",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "demo",
+			"table": "demo2"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

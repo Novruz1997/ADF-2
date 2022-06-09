@@ -1,0 +1,9 @@
+{
+	"name": "AzureDataFactory-Udemy-2",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "13e139d0-5c95-45fd-a424-ca427c3ba3ea",
+		"tenantId": "a8eec281-aaa3-4dae-ac9b-9a398b9215e7"
+	}
+}

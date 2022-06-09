@@ -1,0 +1,27 @@
+{
+	"name": "AzureSql_DS_Dept",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSQL_EMP_LK",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "depId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "depName",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "dept"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
