@@ -1,0 +1,12 @@
+{
+	"name": "AzureSQL_IncrementalLoad2_SRC_Ds",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSQL_IncrementalLoad2_SRC_LK",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}

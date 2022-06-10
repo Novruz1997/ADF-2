@@ -1,0 +1,378 @@
+{
+	"name": "6_IncrementalLoadUdemy",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookup1",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "select * from dbo.cfg\nwhere Enabled = 1",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "AzureSQL_Source_IncrementalLoad2_DS",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "Filter1",
+				"type": "Filter",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Lookup1').output.value",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@equals(item().Source, 'CRM')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Filter1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Filter1').output",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "If Condition1",
+							"type": "IfCondition",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"expression": {
+									"value": "@bool(equals(item().Incremental_Full_Load, 1))",
+									"type": "Expression"
+								},
+								"ifFalseActivities": [
+									{
+										"name": "Copy data2",
+										"type": "Copy",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "AzureSqlSource",
+												"sqlReaderQuery": "select * from '@{item().Table_Name}'",
+												"queryTimeout": "02:00:00",
+												"partitionOption": "None"
+											},
+											"sink": {
+												"type": "AzureSqlSink",
+												"writeBehavior": "insert",
+												"sqlWriterUseTableLock": false
+											},
+											"enableStaging": false,
+											"translator": {
+												"type": "TabularTranslator",
+												"typeConversion": true,
+												"typeConversionSettings": {
+													"allowDataTruncation": true,
+													"treatBooleanAsNumber": false
+												}
+											}
+										},
+										"inputs": [
+											{
+												"referenceName": "AzureSQL_IncrementalLoad2_SRC_Ds",
+												"type": "DatasetReference"
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "AzureSQL_Dest_IncrementalLoad2_STG_DS",
+												"type": "DatasetReference",
+												"parameters": {
+													"TableName": "@{item().Table_Name}"
+												}
+											}
+										]
+									},
+									{
+										"name": "Lookup5",
+										"type": "Lookup",
+										"dependsOn": [
+											{
+												"activity": "Copy data2",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "AzureSqlSource",
+												"sqlReaderQuery": "select max(Last_Updated_Date) as maxD \r\nfrom '@{item().Table_Name}'",
+												"queryTimeout": "02:00:00",
+												"partitionOption": "None"
+											},
+											"dataset": {
+												"referenceName": "AzureSQL_Dest_IncrementalLoad2_STG_DS",
+												"type": "DatasetReference",
+												"parameters": {
+													"TableName": "@item().Table_Name"
+												}
+											}
+										}
+									},
+									{
+										"name": "Lookup6",
+										"type": "Lookup",
+										"dependsOn": [
+											{
+												"activity": "Lookup5",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "AzureSqlSource",
+												"sqlReaderQuery": {
+													"value": "@update cfg \nset Max_LastUpdateDate = '@{activity('Lookup5').output.firstRow.maxD}'\nwhere Table_Name = '@{item().Table_Name}'",
+													"type": "Expression"
+												},
+												"queryTimeout": "02:00:00",
+												"partitionOption": "None"
+											},
+											"dataset": {
+												"referenceName": "AzureSQL_Source_IncrementalLoad2_DS",
+												"type": "DatasetReference"
+											},
+											"firstRowOnly": false
+										}
+									}
+								],
+								"ifTrueActivities": [
+									{
+										"name": "Lookup2",
+										"type": "Lookup",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "AzureSqlSource",
+												"sqlReaderQuery": "select Max_LastUpdateDate from cfg where Table_Name like '@{item().Table_Name}'",
+												"queryTimeout": "02:00:00",
+												"partitionOption": "None"
+											},
+											"dataset": {
+												"referenceName": "AzureSQL_Source_IncrementalLoad2_DS",
+												"type": "DatasetReference"
+											},
+											"firstRowOnly": true
+										}
+									},
+									{
+										"name": "Copy data1",
+										"type": "Copy",
+										"dependsOn": [
+											{
+												"activity": "Lookup2",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "AzureSqlSource",
+												"sqlReaderQuery": {
+													"value": "select * from @{item().Table_Name}\nwhere Last_Updated_Date > '@{activity('Lookup2').output.firstRow.Max_LastUpdateDate}'",
+													"type": "Expression"
+												},
+												"queryTimeout": "02:00:00",
+												"partitionOption": "None"
+											},
+											"sink": {
+												"type": "AzureSqlSink",
+												"writeBehavior": "insert",
+												"sqlWriterUseTableLock": false
+											},
+											"enableStaging": false,
+											"translator": {
+												"type": "TabularTranslator",
+												"typeConversion": true,
+												"typeConversionSettings": {
+													"allowDataTruncation": true,
+													"treatBooleanAsNumber": false
+												}
+											}
+										},
+										"inputs": [
+											{
+												"referenceName": "AzureSQL_IncrementalLoad2_SRC_Ds",
+												"type": "DatasetReference"
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "AzureSQL_Dest_IncrementalLoad2_STG_DS",
+												"type": "DatasetReference",
+												"parameters": {
+													"TableName": {
+														"value": "@{item().Table_Name}",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									},
+									{
+										"name": "Lookup3",
+										"type": "Lookup",
+										"dependsOn": [
+											{
+												"activity": "Copy data1",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "AzureSqlSource",
+												"sqlReaderQuery": "select MAX ( Last_Updated_Date ) as maxD\nfrom @{item().table_name}",
+												"queryTimeout": "02:00:00",
+												"partitionOption": "None"
+											},
+											"dataset": {
+												"referenceName": "AzureSQL_Dest_IncrementalLoad2_STG_DS",
+												"type": "DatasetReference",
+												"parameters": {
+													"TableName": {
+														"value": "@{item().Table_Name}",
+														"type": "Expression"
+													}
+												}
+											}
+										}
+									},
+									{
+										"name": "Lookup4",
+										"type": "Lookup",
+										"dependsOn": [
+											{
+												"activity": "Lookup3",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "AzureSqlSource",
+												"sqlReaderQuery": {
+													"value": "update cfg \nset Max_LastUpdateDate = '@{activity('Lookup3').output.firstRow.maxD}'\nwhere Table_Name like '@{item().Table_Name}'",
+													"type": "Expression"
+												},
+												"queryTimeout": "02:00:00",
+												"partitionOption": "None"
+											},
+											"dataset": {
+												"referenceName": "AzureSQL_Source_IncrementalLoad2_DS",
+												"type": "DatasetReference"
+											},
+											"firstRowOnly": false
+										}
+									}
+								]
+							}
+						}
+					]
+				}
+			}
+		],
+		"annotations": []
+	}
+}
