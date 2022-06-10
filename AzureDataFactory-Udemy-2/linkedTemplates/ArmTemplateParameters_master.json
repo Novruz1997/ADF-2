@@ -8,6 +8,12 @@
 		"AzureSQL_EMP_LK_connectionString": {
 			"value": ""
 		},
+		"AzureSQL_IncrementalLoad2_LK_connectionString": {
+			"value": ""
+		},
+		"AzureSQL_IncrementalLoad2_SRC_LK_connectionString": {
+			"value": ""
+		},
 		"AzureSQL_Incremental_LK_connectionString": {
 			"value": ""
 		},
@@ -27,12 +33,6 @@
 			"value": ""
 		},
 		"SQLServerLocal_Source_LK_password": {
-			"value": ""
-		},
-		"AzureSQL_IncrementalLoad2_LK_connectionString": {
-			"value": ""
-		},
-		"AzureSQL_IncrementalLoad2_SRC_LK_connectionString": {
 			"value": ""
 		},
 		"LocalFileSystem_LK_properties_typeProperties_host": {

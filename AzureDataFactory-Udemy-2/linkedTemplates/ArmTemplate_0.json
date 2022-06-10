@@ -11,6 +11,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSQL_EMP_LK'"
 		},
+		"AzureSQL_IncrementalLoad2_LK_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSQL_IncrementalLoad2_LK'"
+		},
+		"AzureSQL_IncrementalLoad2_SRC_LK_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSQL_IncrementalLoad2_SRC_LK'"
+		},
 		"AzureSQL_Incremental_LK_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSQL_Incremental_LK'"
@@ -26,14 +34,6 @@
 		"AzureSqlDatabase1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
-		},
-		"AzureSQL_IncrementalLoad2_LK_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureSQL_IncrementalLoad2_LK'"
-		},
-		"AzureSQL_IncrementalLoad2_SRC_LK_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureSQL_IncrementalLoad2_SRC_LK'"
 		},
 		"LocalFileSystem_LK_password": {
 			"type": "secureString",
@@ -73,6 +73,32 @@
 				"type": "AzureSqlDatabase",
 				"typeProperties": {
 					"connectionString": "[parameters('AzureSQL_EMP_LK_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSQL_IncrementalLoad2_LK')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSQL_IncrementalLoad2_LK_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSQL_IncrementalLoad2_SRC_LK')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSQL_IncrementalLoad2_SRC_LK_connectionString')]"
 				}
 			},
 			"dependsOn": []
@@ -144,32 +170,6 @@
 			"type": "Microsoft.DataFactory/factories/managedVirtualNetworks",
 			"apiVersion": "2018-06-01",
 			"properties": {},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSQL_IncrementalLoad2_LK')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": "[parameters('AzureSQL_IncrementalLoad2_LK_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSQL_IncrementalLoad2_SRC_LK')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": "[parameters('AzureSQL_IncrementalLoad2_SRC_LK_connectionString')]"
-				}
-			},
 			"dependsOn": []
 		},
 		{

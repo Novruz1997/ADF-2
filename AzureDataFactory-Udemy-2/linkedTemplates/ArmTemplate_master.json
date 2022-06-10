@@ -11,6 +11,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSQL_EMP_LK'"
 		},
+		"AzureSQL_IncrementalLoad2_LK_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSQL_IncrementalLoad2_LK'"
+		},
+		"AzureSQL_IncrementalLoad2_SRC_LK_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSQL_IncrementalLoad2_SRC_LK'"
+		},
 		"AzureSQL_Incremental_LK_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSQL_Incremental_LK'"
@@ -38,14 +46,6 @@
 		"SQLServerLocal_Source_LK_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'SQLServerLocal_Source_LK'"
-		},
-		"AzureSQL_IncrementalLoad2_LK_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureSQL_IncrementalLoad2_LK'"
-		},
-		"AzureSQL_IncrementalLoad2_SRC_LK_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureSQL_IncrementalLoad2_SRC_LK'"
 		},
 		"LocalFileSystem_LK_properties_typeProperties_host": {
 			"type": "string",
@@ -89,6 +89,12 @@
 					"AzureSQL_EMP_LK_connectionString": {
 						"value": "[parameters('AzureSQL_EMP_LK_connectionString')]"
 					},
+					"AzureSQL_IncrementalLoad2_LK_connectionString": {
+						"value": "[parameters('AzureSQL_IncrementalLoad2_LK_connectionString')]"
+					},
+					"AzureSQL_IncrementalLoad2_SRC_LK_connectionString": {
+						"value": "[parameters('AzureSQL_IncrementalLoad2_SRC_LK_connectionString')]"
+					},
 					"AzureSQL_Incremental_LK_connectionString": {
 						"value": "[parameters('AzureSQL_Incremental_LK_connectionString')]"
 					},
@@ -100,12 +106,6 @@
 					},
 					"AzureSqlDatabase1_connectionString": {
 						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
-					},
-					"AzureSQL_IncrementalLoad2_LK_connectionString": {
-						"value": "[parameters('AzureSQL_IncrementalLoad2_LK_connectionString')]"
-					},
-					"AzureSQL_IncrementalLoad2_SRC_LK_connectionString": {
-						"value": "[parameters('AzureSQL_IncrementalLoad2_SRC_LK_connectionString')]"
 					},
 					"LocalFileSystem_LK_password": {
 						"value": "[parameters('LocalFileSystem_LK_password')]"
