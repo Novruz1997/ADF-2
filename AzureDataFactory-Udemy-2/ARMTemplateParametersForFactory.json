@@ -1,0 +1,48 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "AzureDataFactory-Udemy-2"
+		},
+		"AzureSQL_EMP_LK_connectionString": {
+			"value": ""
+		},
+		"AzureSQL_Incremental_LK_connectionString": {
+			"value": ""
+		},
+		"AzureSQL_LK_2_connectionString": {
+			"value": ""
+		},
+		"AzureSQL_LK_3_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"value": ""
+		},
+		"LocalFileSystem_LK_password": {
+			"value": ""
+		},
+		"SQLServerLocal_Source_LK_connectionString": {
+			"value": ""
+		},
+		"SQLServerLocal_Source_LK_password": {
+			"value": ""
+		},
+		"AzureSQL_IncrementalLoad2_LK_connectionString": {
+			"value": ""
+		},
+		"AzureSQL_IncrementalLoad2_SRC_LK_connectionString": {
+			"value": ""
+		},
+		"LocalFileSystem_LK_properties_typeProperties_host": {
+			"value": "\\\\MSI\\Users\\Novruz's_MSI\\Desktop\\ADF\\ADF_UDEMY_COURSE_2\\SQL_FILE"
+		},
+		"LocalFileSystem_LK_properties_typeProperties_userId": {
+			"value": "Novruz's_MSI"
+		},
+		"SQLServerLocal_Source_LK_properties_typeProperties_userName": {
+			"value": "MSI\\Novruz's_MSI"
+		}
+	}
+}

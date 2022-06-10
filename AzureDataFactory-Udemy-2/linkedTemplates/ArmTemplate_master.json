@@ -1,0 +1,153 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "AzureDataFactory-Udemy-2"
+		},
+		"AzureSQL_EMP_LK_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSQL_EMP_LK'"
+		},
+		"AzureSQL_Incremental_LK_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSQL_Incremental_LK'"
+		},
+		"AzureSQL_LK_2_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSQL_LK_2'"
+		},
+		"AzureSQL_LK_3_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSQL_LK_3'"
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		},
+		"LocalFileSystem_LK_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LocalFileSystem_LK'"
+		},
+		"SQLServerLocal_Source_LK_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SQLServerLocal_Source_LK'"
+		},
+		"SQLServerLocal_Source_LK_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SQLServerLocal_Source_LK'"
+		},
+		"AzureSQL_IncrementalLoad2_LK_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSQL_IncrementalLoad2_LK'"
+		},
+		"AzureSQL_IncrementalLoad2_SRC_LK_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSQL_IncrementalLoad2_SRC_LK'"
+		},
+		"LocalFileSystem_LK_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "\\\\MSI\\Users\\Novruz's_MSI\\Desktop\\ADF\\ADF_UDEMY_COURSE_2\\SQL_FILE"
+		},
+		"LocalFileSystem_LK_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "Novruz's_MSI"
+		},
+		"SQLServerLocal_Source_LK_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "MSI\\Novruz's_MSI"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "AzureDataFactory-Udemy-2_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureSQL_EMP_LK_connectionString": {
+						"value": "[parameters('AzureSQL_EMP_LK_connectionString')]"
+					},
+					"AzureSQL_Incremental_LK_connectionString": {
+						"value": "[parameters('AzureSQL_Incremental_LK_connectionString')]"
+					},
+					"AzureSQL_LK_2_connectionString": {
+						"value": "[parameters('AzureSQL_LK_2_connectionString')]"
+					},
+					"AzureSQL_LK_3_connectionString": {
+						"value": "[parameters('AzureSQL_LK_3_connectionString')]"
+					},
+					"AzureSqlDatabase1_connectionString": {
+						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
+					},
+					"AzureSQL_IncrementalLoad2_LK_connectionString": {
+						"value": "[parameters('AzureSQL_IncrementalLoad2_LK_connectionString')]"
+					},
+					"AzureSQL_IncrementalLoad2_SRC_LK_connectionString": {
+						"value": "[parameters('AzureSQL_IncrementalLoad2_SRC_LK_connectionString')]"
+					},
+					"LocalFileSystem_LK_password": {
+						"value": "[parameters('LocalFileSystem_LK_password')]"
+					},
+					"SQLServerLocal_Source_LK_connectionString": {
+						"value": "[parameters('SQLServerLocal_Source_LK_connectionString')]"
+					},
+					"SQLServerLocal_Source_LK_password": {
+						"value": "[parameters('SQLServerLocal_Source_LK_password')]"
+					},
+					"LocalFileSystem_LK_properties_typeProperties_host": {
+						"value": "[parameters('LocalFileSystem_LK_properties_typeProperties_host')]"
+					},
+					"LocalFileSystem_LK_properties_typeProperties_userId": {
+						"value": "[parameters('LocalFileSystem_LK_properties_typeProperties_userId')]"
+					},
+					"SQLServerLocal_Source_LK_properties_typeProperties_userName": {
+						"value": "[parameters('SQLServerLocal_Source_LK_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "AzureDataFactory-Udemy-2_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'AzureDataFactory-Udemy-2_ArmTemplate_0')]"
+			]
+		}
+	]
+}
