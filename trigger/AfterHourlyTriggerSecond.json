@@ -1,0 +1,29 @@
+{
+	"name": "AfterHourlyTriggerSecond",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"type": "TumblingWindowTrigger",
+		"typeProperties": {
+			"frequency": "Hour",
+			"interval": 1,
+			"startTime": "2022-06-10T23:52:00Z",
+			"endTime": "2022-06-11T23:00:00Z",
+			"delay": "00:00:00",
+			"maxConcurrency": 50,
+			"retryPolicy": {
+				"intervalInSeconds": 30
+			},
+			"dependsOn": [
+				{
+					"type": "TumblingWindowTriggerDependencyReference",
+					"offset": "-0.01:11:00",
+					"referenceTrigger": {
+						"referenceName": "HourlyFirstTrigger",
+						"type": "TriggerReference"
+					}
+				}
+			]
+		}
+	}
+}
