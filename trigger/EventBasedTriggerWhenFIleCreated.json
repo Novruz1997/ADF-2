@@ -17,10 +17,10 @@
 		],
 		"type": "BlobEventsTrigger",
 		"typeProperties": {
-			"blobPathBeginsWith": "/demotxt/blobs/input",
+			"blobPathBeginsWith": "/demofiles/blobs/input",
 			"blobPathEndsWith": ".txt",
 			"ignoreEmptyBlobs": true,
-			"scope": "/subscriptions/94eadfb8-e8b1-4e57-9ef0-d425ea3abf4f/resourceGroups/covid-reporting-rg/providers/Microsoft.Storage/storageAccounts/covidreportingdldatalake",
+			"scope": "/subscriptions/94eadfb8-e8b1-4e57-9ef0-d425ea3abf4f/resourceGroups/AzureDataFactory2/providers/Microsoft.Storage/storageAccounts/datalakeadf1",
 			"events": [
 				"Microsoft.Storage.BlobCreated"
 			]

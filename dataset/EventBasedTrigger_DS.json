@@ -2,7 +2,7 @@
 	"name": "EventBasedTrigger_DS",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "EventBasedTrigger_LK",
+			"referenceName": "EventBasedTrigger_DL1",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
@@ -12,6 +12,9 @@
 			"sFile": {
 				"type": "string"
 			}
+		},
+		"folder": {
+			"name": "EventBasedTrigger"
 		},
 		"annotations": [],
 		"type": "Binary",
@@ -26,7 +29,7 @@
 					"value": "@dataset().sFolder",
 					"type": "Expression"
 				},
-				"fileSystem": "demotxt"
+				"fileSystem": "demofiles"
 			}
 		}
 	}

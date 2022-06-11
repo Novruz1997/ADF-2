@@ -2,8 +2,11 @@
 	"name": "EventBasedTrigger_Dest_DS",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "EventBasedTrigger_LK",
+			"referenceName": "EventBasedTrigger_DL1",
 			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "EventBasedTrigger"
 		},
 		"annotations": [],
 		"type": "Binary",
@@ -12,7 +15,7 @@
 				"type": "AzureBlobFSLocation",
 				"fileName": "demo.txt",
 				"folderPath": "output",
-				"fileSystem": "demotxt"
+				"fileSystem": "demofiles"
 			}
 		}
 	}
