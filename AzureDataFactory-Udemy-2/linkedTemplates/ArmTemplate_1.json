@@ -41,7 +41,7 @@
 		},
 		"EventBasedTriggerWhenFIleCreated_properties_typeProperties_scope": {
 			"type": "string",
-			"defaultValue": "/subscriptions/94eadfb8-e8b1-4e57-9ef0-d425ea3abf4f/resourceGroups/AzureDataFactory2/providers/Microsoft.Storage/storageAccounts/datalakeadf1"
+			"defaultValue": "/subscriptions/94eadfb8-e8b1-4e57-9ef0-d425ea3abf4f/resourceGroups/AzureDataFactory2/providers/Microsoft.Storage/storageAccounts/datalakeadf2"
 		}
 	},
 	"variables": {
@@ -54,7 +54,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "EventBasedTrigger_DL1",
+					"referenceName": "EventBasedTrigger_DL2",
 					"type": "LinkedServiceReference"
 				},
 				"folder": {

@@ -47,9 +47,9 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'SQLServerLocal_Source_LK'"
 		},
-		"EventBasedTrigger_DL1_accountKey": {
+		"EventBasedTrigger_DL2_accountKey": {
 			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'EventBasedTrigger_DL1'"
+			"metadata": "Secure string for 'accountKey' of 'EventBasedTrigger_DL2'"
 		},
 		"LocalFileSystem_LK_properties_typeProperties_host": {
 			"type": "string",
@@ -73,11 +73,11 @@
 		},
 		"EventBasedTriggerWhenFIleCreated_properties_typeProperties_scope": {
 			"type": "string",
-			"defaultValue": "/subscriptions/94eadfb8-e8b1-4e57-9ef0-d425ea3abf4f/resourceGroups/AzureDataFactory2/providers/Microsoft.Storage/storageAccounts/datalakeadf1"
+			"defaultValue": "/subscriptions/94eadfb8-e8b1-4e57-9ef0-d425ea3abf4f/resourceGroups/AzureDataFactory2/providers/Microsoft.Storage/storageAccounts/datalakeadf2"
 		},
-		"EventBasedTrigger_DL1_properties_typeProperties_url": {
+		"EventBasedTrigger_DL2_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://datalakeadf1.dfs.core.windows.net"
+			"defaultValue": "https://datalakeadf2.dfs.core.windows.net"
 		},
 		"containerUri": {
 			"type": "string",
@@ -127,11 +127,11 @@
 					"AzureSqlDatabase1_connectionString": {
 						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
 					},
-					"EventBasedTrigger_DL1_accountKey": {
-						"value": "[parameters('EventBasedTrigger_DL1_accountKey')]"
+					"EventBasedTrigger_DL2_accountKey": {
+						"value": "[parameters('EventBasedTrigger_DL2_accountKey')]"
 					},
-					"EventBasedTrigger_DL1_properties_typeProperties_url": {
-						"value": "[parameters('EventBasedTrigger_DL1_properties_typeProperties_url')]"
+					"EventBasedTrigger_DL2_properties_typeProperties_url": {
+						"value": "[parameters('EventBasedTrigger_DL2_properties_typeProperties_url')]"
 					}
 				}
 			},

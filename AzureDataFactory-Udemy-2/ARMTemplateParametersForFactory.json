@@ -35,7 +35,7 @@
 		"SQLServerLocal_Source_LK_password": {
 			"value": ""
 		},
-		"EventBasedTrigger_DL1_accountKey": {
+		"EventBasedTrigger_DL2_accountKey": {
 			"value": ""
 		},
 		"LocalFileSystem_LK_properties_typeProperties_host": {
@@ -54,10 +54,10 @@
 			"value": "@triggerBody().fileName"
 		},
 		"EventBasedTriggerWhenFIleCreated_properties_typeProperties_scope": {
-			"value": "/subscriptions/94eadfb8-e8b1-4e57-9ef0-d425ea3abf4f/resourceGroups/AzureDataFactory2/providers/Microsoft.Storage/storageAccounts/datalakeadf1"
+			"value": "/subscriptions/94eadfb8-e8b1-4e57-9ef0-d425ea3abf4f/resourceGroups/AzureDataFactory2/providers/Microsoft.Storage/storageAccounts/datalakeadf2"
 		},
-		"EventBasedTrigger_DL1_properties_typeProperties_url": {
-			"value": "https://datalakeadf1.dfs.core.windows.net"
+		"EventBasedTrigger_DL2_properties_typeProperties_url": {
+			"value": "https://datalakeadf2.dfs.core.windows.net"
 		}
 	}
 }
