@@ -36,7 +36,17 @@
 				"inputs": [
 					{
 						"referenceName": "EventBasedTrigger_DS",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"sFolder": {
+								"value": "@pipeline().parameters.SourceFolder",
+								"type": "Expression"
+							},
+							"sFile": {
+								"value": "@pipeline().parameters.SourceFIle",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [

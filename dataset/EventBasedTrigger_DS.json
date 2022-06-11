@@ -5,11 +5,27 @@
 			"referenceName": "EventBasedTrigger_LK",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"sFolder": {
+				"type": "string"
+			},
+			"sFile": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "Binary",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().sFile",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().sFolder",
+					"type": "Expression"
+				},
 				"fileSystem": "demotxt"
 			}
 		}
