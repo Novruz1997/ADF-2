@@ -51,10 +51,10 @@
 			"value": "MSI\\Novruz's_MSI"
 		},
 		"EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFolder": {
-			"value": "@triggerBody().filePath"
+			"value": "@triggerBody().sFolder"
 		},
 		"EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFIle": {
-			"value": "@triggerBody().fileName"
+			"value": "@triggerBody().sFile"
 		},
 		"EventBasedTriggerWhenFIleCreated_properties_typeProperties_scope": {
 			"value": "/subscriptions/94eadfb8-e8b1-4e57-9ef0-d425ea3abf4f/resourceGroups/covid-reporting-rg/providers/Microsoft.Storage/storageAccounts/covidreportingdldatalake"
