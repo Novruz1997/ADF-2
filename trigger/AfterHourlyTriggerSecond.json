@@ -22,6 +22,10 @@
 						"referenceName": "HourlyFirstTrigger",
 						"type": "TriggerReference"
 					}
+				},
+				{
+					"type": "SelfDependencyTumblingWindowTriggerReference",
+					"offset": "-0.00:44:00"
 				}
 			]
 		}
