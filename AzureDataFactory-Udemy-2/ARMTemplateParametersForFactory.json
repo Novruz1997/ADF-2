@@ -26,6 +26,9 @@
 		"AzureSqlDatabase1_connectionString": {
 			"value": ""
 		},
+		"EventBasedTrigger_DL2_accountKey": {
+			"value": ""
+		},
 		"LocalFileSystem_LK_password": {
 			"value": ""
 		},
@@ -35,8 +38,8 @@
 		"SQLServerLocal_Source_LK_password": {
 			"value": ""
 		},
-		"EventBasedTrigger_DL2_accountKey": {
-			"value": ""
+		"EventBasedTrigger_DL2_properties_typeProperties_url": {
+			"value": "https://datalakeadf2.dfs.core.windows.net"
 		},
 		"LocalFileSystem_LK_properties_typeProperties_host": {
 			"value": "\\\\MSI\\Users\\Novruz's_MSI\\Desktop\\ADF\\ADF_UDEMY_COURSE_2\\SQL_FILE"
@@ -55,9 +58,6 @@
 		},
 		"EventBasedTriggerWhenFIleCreated_properties_typeProperties_scope": {
 			"value": "/subscriptions/94eadfb8-e8b1-4e57-9ef0-d425ea3abf4f/resourceGroups/AzureDataFactory2/providers/Microsoft.Storage/storageAccounts/datalakeadf2"
-		},
-		"EventBasedTrigger_DL2_properties_typeProperties_url": {
-			"value": "https://datalakeadf2.dfs.core.windows.net"
 		}
 	}
 }

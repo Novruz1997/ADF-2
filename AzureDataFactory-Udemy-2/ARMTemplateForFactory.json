@@ -35,6 +35,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
 		},
+		"EventBasedTrigger_DL2_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'EventBasedTrigger_DL2'"
+		},
 		"LocalFileSystem_LK_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'LocalFileSystem_LK'"
@@ -47,9 +51,9 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'SQLServerLocal_Source_LK'"
 		},
-		"EventBasedTrigger_DL2_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'EventBasedTrigger_DL2'"
+		"EventBasedTrigger_DL2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://datalakeadf2.dfs.core.windows.net"
 		},
 		"LocalFileSystem_LK_properties_typeProperties_host": {
 			"type": "string",
@@ -74,10 +78,6 @@
 		"EventBasedTriggerWhenFIleCreated_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/94eadfb8-e8b1-4e57-9ef0-d425ea3abf4f/resourceGroups/AzureDataFactory2/providers/Microsoft.Storage/storageAccounts/datalakeadf2"
-		},
-		"EventBasedTrigger_DL2_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://datalakeadf2.dfs.core.windows.net"
 		}
 	},
 	"variables": {
@@ -693,6 +693,70 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "delafter",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "EventBasedTrigger_Dest_DS",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/delafter')]",
+				"[concat(variables('factoryId'), '/datasets/EventBasedTrigger_Dest_DS')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureSQL_DS')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -996,8 +1060,7 @@
 						"folderPath": {
 							"value": "@dataset().sFolder",
 							"type": "Expression"
-						},
-						"fileSystem": "demofiles"
+						}
 					}
 				}
 			},
@@ -1022,7 +1085,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "demo.txt",
+						"fileName": "dem.txt",
 						"folderPath": "output",
 						"fileSystem": "demofiles"
 					}
@@ -1095,6 +1158,30 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/SQLServerLocal_Source_LK')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/delafter')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "EventBasedTrigger_DL2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "Agenda.txt",
+						"folderPath": "input",
+						"fileSystem": "demofiles"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/EventBasedTrigger_DL2')]"
 			]
 		},
 		{
@@ -1184,6 +1271,23 @@
 				"type": "AzureSqlDatabase",
 				"typeProperties": {
 					"connectionString": "[parameters('AzureSqlDatabase1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EventBasedTrigger_DL2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('EventBasedTrigger_DL2_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('EventBasedTrigger_DL2_accountKey')]"
+					}
 				}
 			},
 			"dependsOn": []
@@ -1432,23 +1536,6 @@
 			"type": "Microsoft.DataFactory/factories/managedVirtualNetworks",
 			"apiVersion": "2018-06-01",
 			"properties": {},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/EventBasedTrigger_DL2')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('EventBasedTrigger_DL2_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('EventBasedTrigger_DL2_accountKey')]"
-					}
-				}
-			},
 			"dependsOn": []
 		}
 	]
