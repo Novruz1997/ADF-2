@@ -1,20 +1,17 @@
 {
-	"name": "EventBasedTrigger_Dest_DS",
+	"name": "delafter",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "EventBasedTrigger_DL2",
 			"type": "LinkedServiceReference"
-		},
-		"folder": {
-			"name": "EventBasedTrigger"
 		},
 		"annotations": [],
 		"type": "Binary",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "dem.txt",
-				"folderPath": "output",
+				"fileName": "Agenda.txt",
+				"folderPath": "input",
 				"fileSystem": "demofiles"
 			}
 		}

@@ -28,8 +28,7 @@
 				"folderPath": {
 					"value": "@dataset().sFolder",
 					"type": "Expression"
-				},
-				"fileSystem": "demofiles"
+				}
 			}
 		}
 	}
