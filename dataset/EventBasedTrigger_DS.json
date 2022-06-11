@@ -1,0 +1,17 @@
+{
+	"name": "EventBasedTrigger_DS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "EventBasedTrigger_LK",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "demotxt"
+			}
+		}
+	}
+}
