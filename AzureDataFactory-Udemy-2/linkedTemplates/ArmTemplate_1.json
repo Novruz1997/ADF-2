@@ -33,11 +33,11 @@
 		},
 		"EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFolder": {
 			"type": "string",
-			"defaultValue": "@triggerBody().sFolder"
+			"defaultValue": "@triggerBody().folderPath"
 		},
 		"EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFIle": {
 			"type": "string",
-			"defaultValue": "@triggerBody().sFile"
+			"defaultValue": "@triggerBody().fileName"
 		},
 		"EventBasedTriggerWhenFIleCreated_properties_typeProperties_scope": {
 			"type": "string",
@@ -942,7 +942,7 @@
 				],
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
-					"blobPathBeginsWith": "/demotxt/blobs/input/",
+					"blobPathBeginsWith": "/demotxt/blobs/input",
 					"blobPathEndsWith": ".txt",
 					"ignoreEmptyBlobs": true,
 					"scope": "[parameters('EventBasedTriggerWhenFIleCreated_properties_typeProperties_scope')]",
