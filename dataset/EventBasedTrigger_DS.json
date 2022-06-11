@@ -2,7 +2,7 @@
 	"name": "EventBasedTrigger_DS",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "EventBasedTrigger_DL1",
+			"referenceName": "EventBasedTrigger_DL2",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
