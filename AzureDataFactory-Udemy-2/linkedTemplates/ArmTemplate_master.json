@@ -35,6 +35,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
 		},
+		"EventBasedTrigger_LK_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'EventBasedTrigger_LK'"
+		},
 		"LocalFileSystem_LK_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'LocalFileSystem_LK'"
@@ -47,6 +51,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'SQLServerLocal_Source_LK'"
 		},
+		"EventBasedTrigger_LK_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://covidreportingdldatalake.dfs.core.windows.net"
+		},
 		"LocalFileSystem_LK_properties_typeProperties_host": {
 			"type": "string",
 			"defaultValue": "\\\\MSI\\Users\\Novruz's_MSI\\Desktop\\ADF\\ADF_UDEMY_COURSE_2\\SQL_FILE"
@@ -58,6 +66,18 @@
 		"SQLServerLocal_Source_LK_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "MSI\\Novruz's_MSI"
+		},
+		"EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFolder": {
+			"type": "string",
+			"defaultValue": "@triggerBody().filePath"
+		},
+		"EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFIle": {
+			"type": "string",
+			"defaultValue": "@triggerBody().fileName"
+		},
+		"EventBasedTriggerWhenFIleCreated_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/94eadfb8-e8b1-4e57-9ef0-d425ea3abf4f/resourceGroups/covid-reporting-rg/providers/Microsoft.Storage/storageAccounts/covidreportingdldatalake"
 		},
 		"containerUri": {
 			"type": "string",
@@ -107,23 +127,11 @@
 					"AzureSqlDatabase1_connectionString": {
 						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
 					},
-					"LocalFileSystem_LK_password": {
-						"value": "[parameters('LocalFileSystem_LK_password')]"
+					"EventBasedTrigger_LK_accountKey": {
+						"value": "[parameters('EventBasedTrigger_LK_accountKey')]"
 					},
-					"SQLServerLocal_Source_LK_connectionString": {
-						"value": "[parameters('SQLServerLocal_Source_LK_connectionString')]"
-					},
-					"SQLServerLocal_Source_LK_password": {
-						"value": "[parameters('SQLServerLocal_Source_LK_password')]"
-					},
-					"LocalFileSystem_LK_properties_typeProperties_host": {
-						"value": "[parameters('LocalFileSystem_LK_properties_typeProperties_host')]"
-					},
-					"LocalFileSystem_LK_properties_typeProperties_userId": {
-						"value": "[parameters('LocalFileSystem_LK_properties_typeProperties_userId')]"
-					},
-					"SQLServerLocal_Source_LK_properties_typeProperties_userName": {
-						"value": "[parameters('SQLServerLocal_Source_LK_properties_typeProperties_userName')]"
+					"EventBasedTrigger_LK_properties_typeProperties_url": {
+						"value": "[parameters('EventBasedTrigger_LK_properties_typeProperties_url')]"
 					}
 				}
 			},
@@ -142,6 +150,33 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"LocalFileSystem_LK_password": {
+						"value": "[parameters('LocalFileSystem_LK_password')]"
+					},
+					"SQLServerLocal_Source_LK_connectionString": {
+						"value": "[parameters('SQLServerLocal_Source_LK_connectionString')]"
+					},
+					"SQLServerLocal_Source_LK_password": {
+						"value": "[parameters('SQLServerLocal_Source_LK_password')]"
+					},
+					"LocalFileSystem_LK_properties_typeProperties_host": {
+						"value": "[parameters('LocalFileSystem_LK_properties_typeProperties_host')]"
+					},
+					"LocalFileSystem_LK_properties_typeProperties_userId": {
+						"value": "[parameters('LocalFileSystem_LK_properties_typeProperties_userId')]"
+					},
+					"SQLServerLocal_Source_LK_properties_typeProperties_userName": {
+						"value": "[parameters('SQLServerLocal_Source_LK_properties_typeProperties_userName')]"
+					},
+					"EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFolder": {
+						"value": "[parameters('EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFolder')]"
+					},
+					"EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFIle": {
+						"value": "[parameters('EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFIle')]"
+					},
+					"EventBasedTriggerWhenFIleCreated_properties_typeProperties_scope": {
+						"value": "[parameters('EventBasedTriggerWhenFIleCreated_properties_typeProperties_scope')]"
 					}
 				}
 			},

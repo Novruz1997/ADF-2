@@ -6,12 +6,114 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "AzureDataFactory-Udemy-2"
+		},
+		"LocalFileSystem_LK_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LocalFileSystem_LK'"
+		},
+		"SQLServerLocal_Source_LK_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SQLServerLocal_Source_LK'"
+		},
+		"SQLServerLocal_Source_LK_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SQLServerLocal_Source_LK'"
+		},
+		"LocalFileSystem_LK_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "\\\\MSI\\Users\\Novruz's_MSI\\Desktop\\ADF\\ADF_UDEMY_COURSE_2\\SQL_FILE"
+		},
+		"LocalFileSystem_LK_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "Novruz's_MSI"
+		},
+		"SQLServerLocal_Source_LK_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "MSI\\Novruz's_MSI"
+		},
+		"EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFolder": {
+			"type": "string",
+			"defaultValue": "@triggerBody().filePath"
+		},
+		"EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFIle": {
+			"type": "string",
+			"defaultValue": "@triggerBody().fileName"
+		},
+		"EventBasedTriggerWhenFIleCreated_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/94eadfb8-e8b1-4e57-9ef0-d425ea3abf4f/resourceGroups/covid-reporting-rg/providers/Microsoft.Storage/storageAccounts/covidreportingdldatalake"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/EventBasedTrigger_Dest_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "EventBasedTrigger_LK",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "demo.txt",
+						"folderPath": "output",
+						"fileSystem": "demotxt"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LocalFileSystem_LK')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "FileServer",
+				"typeProperties": {
+					"host": "[parameters('LocalFileSystem_LK_properties_typeProperties_host')]",
+					"userId": "[parameters('LocalFileSystem_LK_properties_typeProperties_userId')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('LocalFileSystem_LK_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "SelfHostedintegrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLServerLocal_Source_LK')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('SQLServerLocal_Source_LK_connectionString')]",
+					"userName": "[parameters('SQLServerLocal_Source_LK_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('SQLServerLocal_Source_LK_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "SelfHostedintegrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/2_MoveFilesToSQL')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
@@ -117,6 +219,86 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/6_EventBasedTrigger')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "EventBasedTrigger_DS",
+								"type": "DatasetReference",
+								"parameters": {
+									"sFolder": {
+										"value": "@pipeline().parameters.SourceFolder",
+										"type": "Expression"
+									},
+									"sFile": {
+										"value": "@pipeline().parameters.SourceFIle",
+										"type": "Expression"
+									}
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "EventBasedTrigger_Dest_DS",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"SourceFolder": {
+						"type": "string"
+					},
+					"SourceFIle": {
+						"type": "string"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/EventBasedTrigger_Dest_DS')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/LocalFileSystem_DS')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -156,7 +338,9 @@
 					}
 				]
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LocalFileSystem_LK')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/LocalSqlServer_Source_DS')]",
@@ -175,7 +359,9 @@
 					"table": "config"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLServerLocal_Source_LK')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/1_DataFlow_Join')]",
@@ -733,6 +919,40 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/LocalSqlServer_Source_DS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EventBasedTriggerWhenFIleCreated')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "6_EventBasedTrigger",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"SourceFolder": "[parameters('EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFolder')]",
+							"SourceFIle": "[parameters('EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFIle')]"
+						}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/demotxt/blobs/input/",
+					"blobPathEndsWith": ".txt",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('EventBasedTriggerWhenFIleCreated_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/6_EventBasedTrigger')]"
 			]
 		}
 	]

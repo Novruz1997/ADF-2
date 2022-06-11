@@ -35,29 +35,13 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
 		},
-		"LocalFileSystem_LK_password": {
+		"EventBasedTrigger_LK_accountKey": {
 			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'LocalFileSystem_LK'"
+			"metadata": "Secure string for 'accountKey' of 'EventBasedTrigger_LK'"
 		},
-		"SQLServerLocal_Source_LK_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SQLServerLocal_Source_LK'"
-		},
-		"SQLServerLocal_Source_LK_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'SQLServerLocal_Source_LK'"
-		},
-		"LocalFileSystem_LK_properties_typeProperties_host": {
+		"EventBasedTrigger_LK_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "\\\\MSI\\Users\\Novruz's_MSI\\Desktop\\ADF\\ADF_UDEMY_COURSE_2\\SQL_FILE"
-		},
-		"LocalFileSystem_LK_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "Novruz's_MSI"
-		},
-		"SQLServerLocal_Source_LK_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "MSI\\Novruz's_MSI"
+			"defaultValue": "https://covidreportingdldatalake.dfs.core.windows.net"
 		}
 	},
 	"variables": {
@@ -151,6 +135,23 @@
 				"type": "AzureSqlDatabase",
 				"typeProperties": {
 					"connectionString": "[parameters('AzureSqlDatabase1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EventBasedTrigger_LK')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('EventBasedTrigger_LK_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('EventBasedTrigger_LK_accountKey')]"
+					}
 				}
 			},
 			"dependsOn": []
@@ -445,51 +446,41 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/LocalFileSystem_LK')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/EventBasedTrigger_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"annotations": [],
-				"type": "FileServer",
-				"typeProperties": {
-					"host": "[parameters('LocalFileSystem_LK_properties_typeProperties_host')]",
-					"userId": "[parameters('LocalFileSystem_LK_properties_typeProperties_userId')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('LocalFileSystem_LK_password')]"
+				"linkedServiceName": {
+					"referenceName": "EventBasedTrigger_LK",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"sFolder": {
+						"type": "string"
+					},
+					"sFile": {
+						"type": "string"
 					}
 				},
-				"connectVia": {
-					"referenceName": "SelfHostedintegrationRuntime1",
-					"type": "IntegrationRuntimeReference"
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().sFile",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@dataset().sFolder",
+							"type": "Expression"
+						},
+						"fileSystem": "demotxt"
+					}
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/SelfHostedintegrationRuntime1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SQLServerLocal_Source_LK')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('SQLServerLocal_Source_LK_connectionString')]",
-					"userName": "[parameters('SQLServerLocal_Source_LK_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('SQLServerLocal_Source_LK_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "SelfHostedintegrationRuntime1",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/SelfHostedintegrationRuntime1')]"
+				"[concat(variables('factoryId'), '/linkedServices/EventBasedTrigger_LK')]"
 			]
 		}
 	]

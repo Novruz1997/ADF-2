@@ -26,6 +26,9 @@
 		"AzureSqlDatabase1_connectionString": {
 			"value": ""
 		},
+		"EventBasedTrigger_LK_accountKey": {
+			"value": ""
+		},
 		"LocalFileSystem_LK_password": {
 			"value": ""
 		},
@@ -35,6 +38,9 @@
 		"SQLServerLocal_Source_LK_password": {
 			"value": ""
 		},
+		"EventBasedTrigger_LK_properties_typeProperties_url": {
+			"value": "https://covidreportingdldatalake.dfs.core.windows.net"
+		},
 		"LocalFileSystem_LK_properties_typeProperties_host": {
 			"value": "\\\\MSI\\Users\\Novruz's_MSI\\Desktop\\ADF\\ADF_UDEMY_COURSE_2\\SQL_FILE"
 		},
@@ -43,6 +49,15 @@
 		},
 		"SQLServerLocal_Source_LK_properties_typeProperties_userName": {
 			"value": "MSI\\Novruz's_MSI"
+		},
+		"EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFolder": {
+			"value": "@triggerBody().filePath"
+		},
+		"EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFIle": {
+			"value": "@triggerBody().fileName"
+		},
+		"EventBasedTriggerWhenFIleCreated_properties_typeProperties_scope": {
+			"value": "/subscriptions/94eadfb8-e8b1-4e57-9ef0-d425ea3abf4f/resourceGroups/covid-reporting-rg/providers/Microsoft.Storage/storageAccounts/covidreportingdldatalake"
 		},
 		"containerUri": {
 			"value": ""
