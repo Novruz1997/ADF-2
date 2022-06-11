@@ -41,7 +41,7 @@
 		},
 		"EventBasedTriggerWhenFIleCreated_properties_typeProperties_scope": {
 			"type": "string",
-			"defaultValue": "/subscriptions/94eadfb8-e8b1-4e57-9ef0-d425ea3abf4f/resourceGroups/covid-reporting-rg/providers/Microsoft.Storage/storageAccounts/covidreportingdldatalake"
+			"defaultValue": "/subscriptions/94eadfb8-e8b1-4e57-9ef0-d425ea3abf4f/resourceGroups/AzureDataFactory2/providers/Microsoft.Storage/storageAccounts/datalakeadf1"
 		}
 	},
 	"variables": {
@@ -54,8 +54,11 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "EventBasedTrigger_LK",
+					"referenceName": "EventBasedTrigger_DL1",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "EventBasedTrigger"
 				},
 				"annotations": [],
 				"type": "Binary",
@@ -64,7 +67,7 @@
 						"type": "AzureBlobFSLocation",
 						"fileName": "demo.txt",
 						"folderPath": "output",
-						"fileSystem": "demotxt"
+						"fileSystem": "demofiles"
 					}
 				}
 			},
@@ -942,7 +945,7 @@
 				],
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
-					"blobPathBeginsWith": "/demotxt/blobs/input",
+					"blobPathBeginsWith": "/demofiles/blobs/input",
 					"blobPathEndsWith": ".txt",
 					"ignoreEmptyBlobs": true,
 					"scope": "[parameters('EventBasedTriggerWhenFIleCreated_properties_typeProperties_scope')]",

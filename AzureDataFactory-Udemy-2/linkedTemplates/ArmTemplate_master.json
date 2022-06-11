@@ -35,10 +35,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
 		},
-		"EventBasedTrigger_LK_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'EventBasedTrigger_LK'"
-		},
 		"LocalFileSystem_LK_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'LocalFileSystem_LK'"
@@ -51,9 +47,9 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'SQLServerLocal_Source_LK'"
 		},
-		"EventBasedTrigger_LK_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://covidreportingdldatalake.dfs.core.windows.net"
+		"EventBasedTrigger_DL1_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'EventBasedTrigger_DL1'"
 		},
 		"LocalFileSystem_LK_properties_typeProperties_host": {
 			"type": "string",
@@ -77,7 +73,11 @@
 		},
 		"EventBasedTriggerWhenFIleCreated_properties_typeProperties_scope": {
 			"type": "string",
-			"defaultValue": "/subscriptions/94eadfb8-e8b1-4e57-9ef0-d425ea3abf4f/resourceGroups/covid-reporting-rg/providers/Microsoft.Storage/storageAccounts/covidreportingdldatalake"
+			"defaultValue": "/subscriptions/94eadfb8-e8b1-4e57-9ef0-d425ea3abf4f/resourceGroups/AzureDataFactory2/providers/Microsoft.Storage/storageAccounts/datalakeadf1"
+		},
+		"EventBasedTrigger_DL1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://datalakeadf1.dfs.core.windows.net"
 		},
 		"containerUri": {
 			"type": "string",
@@ -127,11 +127,11 @@
 					"AzureSqlDatabase1_connectionString": {
 						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
 					},
-					"EventBasedTrigger_LK_accountKey": {
-						"value": "[parameters('EventBasedTrigger_LK_accountKey')]"
+					"EventBasedTrigger_DL1_accountKey": {
+						"value": "[parameters('EventBasedTrigger_DL1_accountKey')]"
 					},
-					"EventBasedTrigger_LK_properties_typeProperties_url": {
-						"value": "[parameters('EventBasedTrigger_LK_properties_typeProperties_url')]"
+					"EventBasedTrigger_DL1_properties_typeProperties_url": {
+						"value": "[parameters('EventBasedTrigger_DL1_properties_typeProperties_url')]"
 					}
 				}
 			},
