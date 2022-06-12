@@ -41,6 +41,9 @@
 		"SelfHosted_SQLServer_connectionString": {
 			"value": ""
 		},
+		"SelfHosted_SQLServer_password": {
+			"value": ""
+		},
 		"EventBasedTrigger_DL2_properties_typeProperties_url": {
 			"value": "https://datalakeadf2.dfs.core.windows.net"
 		},
@@ -52,6 +55,9 @@
 		},
 		"SQLServerLocal_Source_LK_properties_typeProperties_userName": {
 			"value": "MSI\\Novruz's_MSI"
+		},
+		"SelfHosted_SQLServer_properties_typeProperties_userName": {
+			"value": "Novruz's_MSI"
 		},
 		"EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFolder": {
 			"value": "@triggerBody().folderPath"

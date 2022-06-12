@@ -55,6 +55,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SelfHosted_SQLServer'"
 		},
+		"SelfHosted_SQLServer_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SelfHosted_SQLServer'"
+		},
 		"EventBasedTrigger_DL2_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://datalakeadf2.dfs.core.windows.net"
@@ -70,6 +74,10 @@
 		"SQLServerLocal_Source_LK_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "MSI\\Novruz's_MSI"
+		},
+		"SelfHosted_SQLServer_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "Novruz's_MSI"
 		},
 		"EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFolder": {
 			"type": "string",
@@ -167,6 +175,9 @@
 					"SelfHosted_SQLServer_connectionString": {
 						"value": "[parameters('SelfHosted_SQLServer_connectionString')]"
 					},
+					"SelfHosted_SQLServer_password": {
+						"value": "[parameters('SelfHosted_SQLServer_password')]"
+					},
 					"LocalFileSystem_LK_properties_typeProperties_host": {
 						"value": "[parameters('LocalFileSystem_LK_properties_typeProperties_host')]"
 					},
@@ -175,6 +186,9 @@
 					},
 					"SQLServerLocal_Source_LK_properties_typeProperties_userName": {
 						"value": "[parameters('SQLServerLocal_Source_LK_properties_typeProperties_userName')]"
+					},
+					"SelfHosted_SQLServer_properties_typeProperties_userName": {
+						"value": "[parameters('SelfHosted_SQLServer_properties_typeProperties_userName')]"
 					},
 					"EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFolder": {
 						"value": "[parameters('EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFolder')]"

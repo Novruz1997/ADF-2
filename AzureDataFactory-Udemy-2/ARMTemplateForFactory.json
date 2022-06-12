@@ -55,6 +55,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SelfHosted_SQLServer'"
 		},
+		"SelfHosted_SQLServer_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SelfHosted_SQLServer'"
+		},
 		"EventBasedTrigger_DL2_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://datalakeadf2.dfs.core.windows.net"
@@ -70,6 +74,10 @@
 		"SQLServerLocal_Source_LK_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "MSI\\Novruz's_MSI"
+		},
+		"SelfHosted_SQLServer_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "Novruz's_MSI"
 		},
 		"EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFolder": {
 			"type": "string",
@@ -749,11 +757,11 @@
 								"type": "DatasetReference",
 								"parameters": {
 									"DB_Name": {
-										"value": "@pipeline().parameters.Database_Name",
+										"value": "@pipeline().parameters.Dest_DBName",
 										"type": "Expression"
 									},
 									"TableName": {
-										"value": "@pipeline().parameters.Dest_TableName",
+										"value": "@pipeline().parameters.Table_Name",
 										"type": "Expression"
 									}
 								}
@@ -772,7 +780,7 @@
 					"Table_Name": {
 						"type": "string"
 					},
-					"Dest_TableName": {
+					"Dest_DBName": {
 						"type": "string"
 					}
 				},
@@ -1420,7 +1428,12 @@
 				"annotations": [],
 				"type": "SqlServer",
 				"typeProperties": {
-					"connectionString": "[parameters('SelfHosted_SQLServer_connectionString')]"
+					"connectionString": "[parameters('SelfHosted_SQLServer_connectionString')]",
+					"userName": "[parameters('SelfHosted_SQLServer_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('SelfHosted_SQLServer_password')]"
+					}
 				},
 				"connectVia": {
 					"referenceName": "SelfHostedintegrationRuntime1",
