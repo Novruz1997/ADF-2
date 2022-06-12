@@ -29,7 +29,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@equals(replace(variables('FName'), 'Sales', ''),'Hourly')",
+						"value": "@equals(replace(variables('FName'), 'Sales', ''),'Hourly.csv')",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
