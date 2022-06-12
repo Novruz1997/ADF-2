@@ -74,9 +74,6 @@
 		"SelfHosted_SQLServer_properties_typeProperties_userName": {
 			"value": "Novruz's_MSI"
 		},
-		"DailyHourly_properties_pipeline1_parameters_FileName": {
-			"value": "@triggerBody.fileName"
-		},
 		"DailyHourly_properties_typeProperties_scope": {
 			"value": "/subscriptions/94eadfb8-e8b1-4e57-9ef0-d425ea3abf4f/resourceGroups/AzureDataFactory2/providers/Microsoft.Storage/storageAccounts/datalakeadf2"
 		},
@@ -87,6 +84,12 @@
 			"value": "@triggerBody().fileName"
 		},
 		"EventBasedTriggerWhenFIleCreated_properties_typeProperties_scope": {
+			"value": "/subscriptions/94eadfb8-e8b1-4e57-9ef0-d425ea3abf4f/resourceGroups/AzureDataFactory2/providers/Microsoft.Storage/storageAccounts/datalakeadf2"
+		},
+		"Daily_Hourly_properties_pipeline1_parameters_FileName": {
+			"value": "@triggerBody.fileName"
+		},
+		"Daily_Hourly_properties_typeProperties_scope": {
 			"value": "/subscriptions/94eadfb8-e8b1-4e57-9ef0-d425ea3abf4f/resourceGroups/AzureDataFactory2/providers/Microsoft.Storage/storageAccounts/datalakeadf2"
 		}
 	}
