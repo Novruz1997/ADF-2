@@ -49,11 +49,11 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"DB_Name": {
-								"value": "@pipeline().parameters.Database_Name",
+								"value": "@pipeline().parameters.Dest_DBName",
 								"type": "Expression"
 							},
 							"TableName": {
-								"value": "@pipeline().parameters.Dest_TableName",
+								"value": "@pipeline().parameters.Table_Name",
 								"type": "Expression"
 							}
 						}
@@ -68,7 +68,7 @@
 			"Table_Name": {
 				"type": "string"
 			},
-			"Dest_TableName": {
+			"Dest_DBName": {
 				"type": "string"
 			}
 		},
