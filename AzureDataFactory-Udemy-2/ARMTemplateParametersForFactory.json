@@ -38,6 +38,9 @@
 		"SQLServerLocal_Source_LK_password": {
 			"value": ""
 		},
+		"SelfHosted_SQLServer_connectionString": {
+			"value": ""
+		},
 		"EventBasedTrigger_DL2_properties_typeProperties_url": {
 			"value": "https://datalakeadf2.dfs.core.windows.net"
 		},

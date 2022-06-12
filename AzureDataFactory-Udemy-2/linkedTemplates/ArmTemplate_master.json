@@ -51,6 +51,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'SQLServerLocal_Source_LK'"
 		},
+		"SelfHosted_SQLServer_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SelfHosted_SQLServer'"
+		},
 		"EventBasedTrigger_DL2_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://datalakeadf2.dfs.core.windows.net"
@@ -159,6 +163,9 @@
 					},
 					"SQLServerLocal_Source_LK_password": {
 						"value": "[parameters('SQLServerLocal_Source_LK_password')]"
+					},
+					"SelfHosted_SQLServer_connectionString": {
+						"value": "[parameters('SelfHosted_SQLServer_connectionString')]"
 					},
 					"LocalFileSystem_LK_properties_typeProperties_host": {
 						"value": "[parameters('LocalFileSystem_LK_properties_typeProperties_host')]"
