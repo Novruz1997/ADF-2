@@ -2191,7 +2191,7 @@
 				],
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
-					"blobPathBeginsWith": "/hourly-daily-data/blobs/",
+					"blobPathBeginsWith": "/hourly-daily-data/blobs/data",
 					"blobPathEndsWith": ".csv",
 					"ignoreEmptyBlobs": true,
 					"scope": "[parameters('Daily_Hourly_properties_typeProperties_scope')]",
