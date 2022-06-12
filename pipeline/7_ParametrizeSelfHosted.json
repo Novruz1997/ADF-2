@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "7_ParametrizeSelfHosted",
 	"properties": {
 		"activities": [
 			{
@@ -16,37 +16,62 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "BinarySource",
-						"storeSettings": {
-							"type": "AzureBlobFSReadSettings",
-							"recursive": true
-						},
-						"formatSettings": {
-							"type": "BinaryReadSettings"
-						}
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
 					},
 					"sink": {
-						"type": "BinarySink",
-						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings"
-						}
+						"type": "SqlServerSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
 					},
 					"enableStaging": false
 				},
 				"inputs": [
 					{
-						"referenceName": "delafter",
-						"type": "DatasetReference"
+						"referenceName": "SelfHosted_SQLServer",
+						"type": "DatasetReference",
+						"parameters": {
+							"DB_Name": {
+								"value": "@pipeline().parameters.Database_Name",
+								"type": "Expression"
+							},
+							"TableName": {
+								"value": "@pipeline().parameters.Table_Name",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "EventBasedTrigger_Dest_DS",
-						"type": "DatasetReference"
+						"referenceName": "SelfHosted_SQLServer",
+						"type": "DatasetReference",
+						"parameters": {
+							"DB_Name": {
+								"value": "@pipeline().parameters.Database_Name",
+								"type": "Expression"
+							},
+							"TableName": {
+								"value": "@pipeline().parameters.Dest_TableName",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
 		],
+		"parameters": {
+			"Database_Name": {
+				"type": "string"
+			},
+			"Table_Name": {
+				"type": "string"
+			},
+			"Dest_TableName": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }

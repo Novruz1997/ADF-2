@@ -1,0 +1,36 @@
+{
+	"name": "SelfHosted_SQLServer",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SelfHosted_SQLServer",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"DBName": {
+					"value": "@dataset().DB_Name",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"DB_Name": {
+				"type": "string"
+			},
+			"TableName": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Parametrize_LK"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": {
+				"value": "@dataset().TableName",
+				"type": "Expression"
+			}
+		}
+	}
+}
