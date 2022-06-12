@@ -99,10 +99,6 @@
 			"type": "string",
 			"defaultValue": "Novruz's_MSI"
 		},
-		"DailyHourly_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/94eadfb8-e8b1-4e57-9ef0-d425ea3abf4f/resourceGroups/AzureDataFactory2/providers/Microsoft.Storage/storageAccounts/datalakeadf2"
-		},
 		"EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFolder": {
 			"type": "string",
 			"defaultValue": "@triggerBody().folderPath"
@@ -182,9 +178,6 @@
 					},
 					"HourlyDaily_LK_properties_typeProperties_url": {
 						"value": "[parameters('HourlyDaily_LK_properties_typeProperties_url')]"
-					},
-					"DailyHourly_properties_typeProperties_scope": {
-						"value": "[parameters('DailyHourly_properties_typeProperties_scope')]"
 					}
 				}
 			},
