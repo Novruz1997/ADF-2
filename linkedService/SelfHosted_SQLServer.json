@@ -10,8 +10,9 @@
 		"annotations": [],
 		"type": "SqlServer",
 		"typeProperties": {
-			"connectionString": "integrated security=False;data source=MSI\\SQLSERVER2019;initial catalog=@{linkedService().DBName};user id=novruz_guliyev",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJmZjJmNTBjNy0wMjFmLTQ2MjctYWJhNi1mMDU5ZTEzOGJjZGYiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"connectionString": "integrated security=True;data source=MSI\\SQLSERVER2019;initial catalog=@{linkedService().DBName}",
+			"userName": "Novruz's_MSI",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI4NDg0Y2ZiYy05OGU1LTRkODktYTk2NS1hZjA4MmEyMmY3MTgiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "SelfHostedintegrationRuntime1",
