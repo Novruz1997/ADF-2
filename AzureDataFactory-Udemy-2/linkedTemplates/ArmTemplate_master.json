@@ -39,6 +39,18 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'EventBasedTrigger_DL2'"
 		},
+		"HourlyDaily_LK_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'HourlyDaily_LK'"
+		},
+		"LK_StoredProcedure_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LK_StoredProcedure'"
+		},
+		"LK_StoredProcedure_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LK_StoredProcedure'"
+		},
 		"LocalFileSystem_LK_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'LocalFileSystem_LK'"
@@ -63,6 +75,14 @@
 			"type": "string",
 			"defaultValue": "https://datalakeadf2.dfs.core.windows.net"
 		},
+		"HourlyDaily_LK_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://datalakeadf2.dfs.core.windows.net"
+		},
+		"LK_StoredProcedure_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "Novruz's_MSI"
+		},
 		"LocalFileSystem_LK_properties_typeProperties_host": {
 			"type": "string",
 			"defaultValue": "\\\\MSI\\Users\\Novruz's_MSI\\Desktop\\ADF\\ADF_UDEMY_COURSE_2\\SQL_FILE"
@@ -78,6 +98,14 @@
 		"SelfHosted_SQLServer_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "Novruz's_MSI"
+		},
+		"DailyHourly_properties_pipeline1_parameters_FileName": {
+			"type": "string",
+			"defaultValue": "@triggerBody.fileName"
+		},
+		"DailyHourly_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/94eadfb8-e8b1-4e57-9ef0-d425ea3abf4f/resourceGroups/AzureDataFactory2/providers/Microsoft.Storage/storageAccounts/datalakeadf2"
 		},
 		"EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFolder": {
 			"type": "string",
@@ -142,8 +170,14 @@
 					"EventBasedTrigger_DL2_accountKey": {
 						"value": "[parameters('EventBasedTrigger_DL2_accountKey')]"
 					},
+					"HourlyDaily_LK_accountKey": {
+						"value": "[parameters('HourlyDaily_LK_accountKey')]"
+					},
 					"EventBasedTrigger_DL2_properties_typeProperties_url": {
 						"value": "[parameters('EventBasedTrigger_DL2_properties_typeProperties_url')]"
+					},
+					"HourlyDaily_LK_properties_typeProperties_url": {
+						"value": "[parameters('HourlyDaily_LK_properties_typeProperties_url')]"
 					}
 				}
 			},
@@ -163,6 +197,12 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"LK_StoredProcedure_connectionString": {
+						"value": "[parameters('LK_StoredProcedure_connectionString')]"
+					},
+					"LK_StoredProcedure_password": {
+						"value": "[parameters('LK_StoredProcedure_password')]"
+					},
 					"LocalFileSystem_LK_password": {
 						"value": "[parameters('LocalFileSystem_LK_password')]"
 					},
@@ -178,6 +218,9 @@
 					"SelfHosted_SQLServer_password": {
 						"value": "[parameters('SelfHosted_SQLServer_password')]"
 					},
+					"LK_StoredProcedure_properties_typeProperties_userName": {
+						"value": "[parameters('LK_StoredProcedure_properties_typeProperties_userName')]"
+					},
 					"LocalFileSystem_LK_properties_typeProperties_host": {
 						"value": "[parameters('LocalFileSystem_LK_properties_typeProperties_host')]"
 					},
@@ -189,6 +232,32 @@
 					},
 					"SelfHosted_SQLServer_properties_typeProperties_userName": {
 						"value": "[parameters('SelfHosted_SQLServer_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'AzureDataFactory-Udemy-2_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "AzureDataFactory-Udemy-2_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"DailyHourly_properties_pipeline1_parameters_FileName": {
+						"value": "[parameters('DailyHourly_properties_pipeline1_parameters_FileName')]"
+					},
+					"DailyHourly_properties_typeProperties_scope": {
+						"value": "[parameters('DailyHourly_properties_typeProperties_scope')]"
 					},
 					"EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFolder": {
 						"value": "[parameters('EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFolder')]"
@@ -202,7 +271,7 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'AzureDataFactory-Udemy-2_ArmTemplate_0')]"
+				"[resourceId('Microsoft.Resources/deployments', 'AzureDataFactory-Udemy-2_ArmTemplate_1')]"
 			]
 		}
 	]

@@ -29,6 +29,15 @@
 		"EventBasedTrigger_DL2_accountKey": {
 			"value": ""
 		},
+		"HourlyDaily_LK_accountKey": {
+			"value": ""
+		},
+		"LK_StoredProcedure_connectionString": {
+			"value": ""
+		},
+		"LK_StoredProcedure_password": {
+			"value": ""
+		},
 		"LocalFileSystem_LK_password": {
 			"value": ""
 		},
@@ -47,6 +56,12 @@
 		"EventBasedTrigger_DL2_properties_typeProperties_url": {
 			"value": "https://datalakeadf2.dfs.core.windows.net"
 		},
+		"HourlyDaily_LK_properties_typeProperties_url": {
+			"value": "https://datalakeadf2.dfs.core.windows.net"
+		},
+		"LK_StoredProcedure_properties_typeProperties_userName": {
+			"value": "Novruz's_MSI"
+		},
 		"LocalFileSystem_LK_properties_typeProperties_host": {
 			"value": "\\\\MSI\\Users\\Novruz's_MSI\\Desktop\\ADF\\ADF_UDEMY_COURSE_2\\SQL_FILE"
 		},
@@ -58,6 +73,12 @@
 		},
 		"SelfHosted_SQLServer_properties_typeProperties_userName": {
 			"value": "Novruz's_MSI"
+		},
+		"DailyHourly_properties_pipeline1_parameters_FileName": {
+			"value": "@triggerBody.fileName"
+		},
+		"DailyHourly_properties_typeProperties_scope": {
+			"value": "/subscriptions/94eadfb8-e8b1-4e57-9ef0-d425ea3abf4f/resourceGroups/AzureDataFactory2/providers/Microsoft.Storage/storageAccounts/datalakeadf2"
 		},
 		"EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFolder": {
 			"value": "@triggerBody().folderPath"
