@@ -1,0 +1,37 @@
+{
+	"name": "UntilActivityDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "UntilActivity_LK",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "demo.csv",
+				"folderPath": "data",
+				"fileSystem": "hourly-daily-data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "weather",
+				"type": "String"
+			},
+			{
+				"name": "cloud",
+				"type": "String"
+			},
+			{
+				"name": "degree",
+				"type": "String"
+			}
+		]
+	}
+}
