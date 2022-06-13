@@ -71,6 +71,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'SelfHosted_SQLServer'"
 		},
+		"UntilActivity_LK_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'UntilActivity_LK'"
+		},
 		"EventBasedTrigger_DL2_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://datalakeadf2.dfs.core.windows.net"
@@ -99,6 +103,18 @@
 			"type": "string",
 			"defaultValue": "Novruz's_MSI"
 		},
+		"UntilActivity_LK_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://datalakeadf2.dfs.core.windows.net"
+		},
+		"Daily_Hourly_properties_pipeline1_parameters_FileName": {
+			"type": "string",
+			"defaultValue": "@triggerBody.fileName"
+		},
+		"Daily_Hourly_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/94eadfb8-e8b1-4e57-9ef0-d425ea3abf4f/resourceGroups/AzureDataFactory2/providers/Microsoft.Storage/storageAccounts/datalakeadf2"
+		},
 		"EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFolder": {
 			"type": "string",
 			"defaultValue": "@triggerBody().folderPath"
@@ -108,14 +124,6 @@
 			"defaultValue": "@triggerBody().fileName"
 		},
 		"EventBasedTriggerWhenFIleCreated_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/94eadfb8-e8b1-4e57-9ef0-d425ea3abf4f/resourceGroups/AzureDataFactory2/providers/Microsoft.Storage/storageAccounts/datalakeadf2"
-		},
-		"Daily_Hourly_properties_pipeline1_parameters_FileName": {
-			"type": "string",
-			"defaultValue": "@triggerBody.fileName"
-		},
-		"Daily_Hourly_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/94eadfb8-e8b1-4e57-9ef0-d425ea3abf4f/resourceGroups/AzureDataFactory2/providers/Microsoft.Storage/storageAccounts/datalakeadf2"
 		},
@@ -173,11 +181,17 @@
 					"HourlyDaily_LK_accountKey": {
 						"value": "[parameters('HourlyDaily_LK_accountKey')]"
 					},
+					"UntilActivity_LK_accountKey": {
+						"value": "[parameters('UntilActivity_LK_accountKey')]"
+					},
 					"EventBasedTrigger_DL2_properties_typeProperties_url": {
 						"value": "[parameters('EventBasedTrigger_DL2_properties_typeProperties_url')]"
 					},
 					"HourlyDaily_LK_properties_typeProperties_url": {
 						"value": "[parameters('HourlyDaily_LK_properties_typeProperties_url')]"
+					},
+					"UntilActivity_LK_properties_typeProperties_url": {
+						"value": "[parameters('UntilActivity_LK_properties_typeProperties_url')]"
 					}
 				}
 			},
@@ -253,6 +267,12 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"Daily_Hourly_properties_pipeline1_parameters_FileName": {
+						"value": "[parameters('Daily_Hourly_properties_pipeline1_parameters_FileName')]"
+					},
+					"Daily_Hourly_properties_typeProperties_scope": {
+						"value": "[parameters('Daily_Hourly_properties_typeProperties_scope')]"
+					},
 					"EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFolder": {
 						"value": "[parameters('EventBasedTriggerWhenFIleCreated_properties_6_EventBasedTrigger_parameters_SourceFolder')]"
 					},
@@ -261,12 +281,6 @@
 					},
 					"EventBasedTriggerWhenFIleCreated_properties_typeProperties_scope": {
 						"value": "[parameters('EventBasedTriggerWhenFIleCreated_properties_typeProperties_scope')]"
-					},
-					"Daily_Hourly_properties_pipeline1_parameters_FileName": {
-						"value": "[parameters('Daily_Hourly_properties_pipeline1_parameters_FileName')]"
-					},
-					"Daily_Hourly_properties_typeProperties_scope": {
-						"value": "[parameters('Daily_Hourly_properties_typeProperties_scope')]"
 					}
 				}
 			},

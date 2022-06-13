@@ -43,11 +43,19 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'HourlyDaily_LK'"
 		},
+		"UntilActivity_LK_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'UntilActivity_LK'"
+		},
 		"EventBasedTrigger_DL2_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://datalakeadf2.dfs.core.windows.net"
 		},
 		"HourlyDaily_LK_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://datalakeadf2.dfs.core.windows.net"
+		},
+		"UntilActivity_LK_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://datalakeadf2.dfs.core.windows.net"
 		}
@@ -56,6 +64,39 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/8_Web Activity Get')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Web1",
+						"type": "WebActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://dummy.restapiexample.com/api/v1/employees",
+							"method": "GET",
+							"headers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSQL_EMP_LK')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -176,6 +217,23 @@
 					"accountKey": {
 						"type": "SecureString",
 						"value": "[parameters('HourlyDaily_LK_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UntilActivity_LK')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('UntilActivity_LK_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('UntilActivity_LK_accountKey')]"
 					}
 				}
 			},
@@ -406,68 +464,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_Incremental_LK')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSql_DS_Dept')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_EMP_LK",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "depId",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "depName",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "dept"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_EMP_LK')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Azure_SQL_Dept_Updated_DS')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSQL_EMP_LK",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "deptId",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "depName",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "dept"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSQL_EMP_LK')]"
 			]
 		}
 	]
